@@ -1,0 +1,32 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+    def isEmpty(self):
+        return self.items == []
+    def push(self, item):
+        self.items.append(item)
+    def pop(self):
+        return self.items.pop()
+    def top(self):
+        return self.items[len(self.items)-1]
+    def size(self):
+        return len(self.items)
+    
+s1 = Stack()
+s2 = Stack()
+N = int(input())
+
+for i in range(0,N):
+    inp = input().split()
+    if inp[0] == '1':
+            s1.push(inp[1])
+    elif inp[0] == '2':
+        if s2.isEmpty():
+            while not s1.isEmpty():
+                s2.push(s1.pop())
+        s2.pop()
+    elif inp[0] == '3':
+        if s2.isEmpty():
+            while not s1.isEmpty():
+                s2.push(s1.pop())
+        print(s2.top())
