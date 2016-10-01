@@ -1,0 +1,35 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+class Stack:
+    def __init__(self):
+        self.items = []
+    def isEmpty(self):
+        return self.items == []
+    def push(self, item):
+        self.items.append(item)
+    def pop(self):
+        return self.items.pop()
+    def top(self):
+        return self.items[len(self.items)-1]
+    def size(self):
+        return len(self.items)
+
+
+s= Stack()
+maxstack = Stack()
+maxstack.push(0)
+
+N = int(input())
+
+for i in range(0,N):
+    inp = input().split()
+    if inp[0] == '1':
+        s.push(int(inp[1]))
+        if(s.top()>=maxstack.top()):
+            maxstack.push(s.top())
+    elif inp[0] == '2':
+        if s.top() == maxstack.top():
+            maxstack.pop()
+        s.pop()
+    elif inp[0] == '3':
+        print(maxstack.top())
+   
