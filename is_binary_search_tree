@@ -1,0 +1,23 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+""" Node is defined as
+class node:
+  def __init__(self, data):
+      self.data = data
+      self.left = None
+      self.right = None
+"""
+import sys
+
+INT_MIN = -sys.maxint -1
+INT_MAX = sys.maxint
+
+def helper(root,imin,imax):
+    if root is None:
+        return True
+    if (root.data < imin or root.data > imax):
+        return False
+    return(helper(root.left,imin,root.data-1) and 
+           helper(root.right,root.data+1,imax))
+
+def check_binary_search_tree_(root):
+    return(helper(root,INT_MIN,INT_MAX))
