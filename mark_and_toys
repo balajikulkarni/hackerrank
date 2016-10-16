@@ -1,0 +1,15 @@
+import sys
+
+def max_toys(N,K,prices):
+    prices=sorted(prices)
+    toys=[]
+    for i in range(N):
+        if K>0 and K>prices[i]:
+            toys.append(prices[i])
+            K-=prices[i]
+    print(len(toys)) 
+
+data= list(map(int, sys.stdin.read().split()))
+N,K =data[0:2]
+prices=data[2:]
+max_toys(N,K,prices)
