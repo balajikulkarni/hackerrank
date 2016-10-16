@@ -1,0 +1,32 @@
+# Uses python3
+import sys
+
+def get_max_luck(n,k,l,t):
+    max_luck = 0
+    ziplist = list(zip(l,t))
+    imp = []
+    lucklist = sorted(ziplist,key= lambda x : x[1]/x[0],reverse=True )
+    
+    for i in range(len(lucklist)):
+        if lucklist[i][1]!=1:
+            max_luck+=lucklist[i][0]
+        else:
+            imp.append(lucklist[i][0])
+            
+    imp =sorted(imp,reverse=True)  
+
+    for i in range(len(imp)):
+        if k>0:
+            max_luck+=imp[i]
+            k-=1
+        else:
+            max_luck-=imp[i]
+    print(max_luck)
+    
+if __name__ == "__main__":
+    data = list(map(int, sys.stdin.read().split()))
+    n, k = data[0:2]
+    l = data[2:(2 * n + 2):2]
+    t = data[3:(2 * n + 2):2]
+    get_max_luck(n,k, l, t)
+    
