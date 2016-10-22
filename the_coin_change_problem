@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define min(a,b) (a<b?a:b)
+
+void CountCoins(int Coins[],int money,int num_coin)
+{
+  int i,j;
+  long long Sol[num_coin+1][money+1];
+ 
+  for (i=0;i<=num_coin;i++)
+      Sol[i][0] = 1;
+  
+    for (i=1;i<=money;i++)
+      Sol[0][i] = 0;
+  
+    for(i=1;i<=num_coin;i++)
+       {
+        for(j=1;j<=money;j++)
+            {
+             if(j>=Coins[i-1])
+               {
+                 Sol[i][j] = Sol[i-1][j]+Sol[i][j-Coins[i-1]];
+             } else {
+                 Sol[i][j] = Sol[i-1][j];
+             }  
+        }
+    }
+  printf("%llu",Sol[num_coin][money]);
+  
+  return;    
+}
+
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int i,money,num_coin,Coins[50];
+    
+    scanf("%d%d",&money,&num_coin);
+    
+    for ( i = 0 ; i < num_coin; i++)
+        scanf("%d",&Coins[i]);
+    
+    CountCoins(Coins,money,num_coin);
+    return 0;
+}
