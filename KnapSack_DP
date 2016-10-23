@@ -1,0 +1,22 @@
+def KnapSack(n,sum,A):
+    value = [0]*(sum+1)
+    value[0] = 0
+   
+    for s in range(1,sum+1):
+        value[s] = 0
+        for i in range(len(A)):
+            if A[i] <=s:
+                val = value[s-A[i]]+A[i]
+                if val > value[s]:
+                    value[s] = val
+    print(value[sum])
+    
+
+
+if __name__ == "__main__":
+    t = int(input())
+    for i in range(t):
+        n,sum  = list(map(int, input().split()))
+        A = list(map(int, input().split()))
+        #print(str(n)+" " +str(sum)+str(A))
+        KnapSack(n,sum,A)
