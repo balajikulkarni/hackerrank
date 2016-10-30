@@ -1,0 +1,37 @@
+
+def lcsprinter(A,B,n,m):
+    Sol = [[0 for i in range(m+1)] for j in range(n+1)]
+    for i in range(n+1):
+        for j in range(m+1):
+            if i == 0 or j == 0:
+                Sol[i][j] = 0
+            elif A[i-1] == B[j-1]:
+                Sol[i][j] = Sol[i-1][j-1]+1   #if number/character at index 'i' of A or at index 'j' of B are same , add 1 to                                                   #diagonal element and consider that value
+            else:
+                Sol[i][j] = max(Sol[i-1][j],Sol[i][j-1])
+    lcs = Sol[n][m]
+    
+    #Creating LCS sequence
+    lcsstr = [ 0 for i in range(lcs)]
+    i=n 
+    j=m
+    while i> 0 and j>0:
+        if A[i-1] == B[j-1]:
+            lcsstr[lcs-1]=A[i-1]  #if number/character at index 'i' of A or at index 'j' of B are same,store in lcsstr
+            i-=1
+            j-=1
+            lcs-=1
+        elif Sol[i-1][j] > Sol[i][j-1]:  #else go in the direction of max value of Sol[i-1][j] and Sol[i][j-1] as the Sol is built
+            i-=1                         #out of max(Sol[i-1][j],Sol[i][j-1])
+        else:
+            j-=1
+            
+    for i in lcsstr:
+        print(i,end=" ")
+pass 
+
+if __name__ == "__main__":
+    n,m = list(map(int,input().split()))
+    A = list(map(int,input().split()))
+    B = list(map(int,input().split()))
+    lcsprinter(A,B,n,m)
