@@ -1,0 +1,15 @@
+t = int(input())
+
+for i in range(t):
+    res = 0
+    n = int(input())
+    arr = list(map(int,input().split()))
+    if len(arr) % 2 == 0:
+        print(0)
+        continue
+    else:
+        for k in range(0,n,2):
+            res^=arr[k]
+        print(res)
+        
+    
